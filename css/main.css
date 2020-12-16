@@ -1,0 +1,44 @@
+.container__form {
+  width: 600px;
+  padding: ;
+  margin: 0 auto;
+  margin-top: 40px;
+  background: ;
+  border-radius: 8px;
+  color: ;
+}
+.container__form .title {
+  padding-bottom: ;
+  margin-bottom: ;
+  border-bottom: solid 2px ;
+  text-align: center;
+  font-size: ;
+}
+.container__form .form {
+  width: 100%;
+}
+.container__form .form__one {
+  width: 240px;
+  margin: 0 auto;
+  margin-bottom: ;
+}
+.container__form .form__one label {
+  display: block;
+}
+.container__form .form__one input {
+  width: 240px;
+  height: 24px;
+}
+.container__form .form__one label.err input, .container__form .form__one label.err select {
+  background: #f7dcd9;
+}
+.container__form .form__title {
+  padding-bottom: ;
+}
+.container__form .form .area-msg {
+  margin-top: ;
+  color: ;
+}
+.container__form .form__btn {
+  text-align: center;
+}
