@@ -1,0 +1,41 @@
+//————— ベース —————
+
+// カラー
+$main-color: #B4CF9E;
+$bg-color: #FDFCF4;
+$font-color: #362F2F;
+$content-color: #FFFFFF;
+$valid-color: #AA0033;
+
+// フォントサイズ
+$font-size_s: 8px;
+$font-size_m: 12px;
+$font-size_default: 16px;
+$font-size_l: 20px;
+$font-size_xl: 24px;
+$font-size_xxl: 28px;
+$font-size_3l: 32px;
+
+// スペース
+$space_s: 8px;
+$space_m: 16px;
+$space_l: 24px;
+$space_xl: 32px;
+$space_xxl: 40px;
+
+a {
+  color: $font-color;
+  text-decoration: none;
+
+  &visited {
+    color: $font-color;
+  }
+}
+
+button:focus {
+  outline: none;
+}
+
+button:hover {
+  cursor: pointer;
+}

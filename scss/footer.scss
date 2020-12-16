@@ -1,0 +1,41 @@
+#footer {
+  width: 100%;
+  background: $main-color;
+  font-size: 16px;
+}
+
+.footer {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+.footer__nav {
+  width: 100%;
+  padding-bottom: 16px;
+  border-bottom: solid 1px gray;
+}
+
+.footer__nav .nav__list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.footer__nav .nav__list .nav__one {
+  width: 180px;
+  text-align: center;
+}
+
+.footer__nav .nav__list .nav__one:hover {
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 0.4s;
+}
+
+.footer__bottom {
+  padding-bottom: 16px;
+  text-align: center;
+}

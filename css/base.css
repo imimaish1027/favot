@@ -1,0 +1,13 @@
+a {
+  color: #362f2f;
+  text-decoration: none;
+}
+avisited {
+  color: #362f2f;
+}
+button:focus {
+  outline: none;
+}
+button:hover {
+  cursor: pointer;
+}
