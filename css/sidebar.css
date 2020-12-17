@@ -1,0 +1,16 @@
+.sidebar {
+  width: 140px;
+  height: 160px;
+  padding: ;
+  margin-top: ;
+  margin-right: *2;
+  background: ;
+  border-radius: 8px;
+  line-height: 2;
+}
+.sidebar .nav__one:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  background: ;
+  transition: 0.4s;
+}

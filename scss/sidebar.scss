@@ -1,0 +1,20 @@
+.sidebar {
+    width: 140px;
+    height: 160px;
+    padding: $space_m;
+    margin-top: $space_xl;
+    margin-right: $space_xl*2;
+    background: $content-color;
+    border-radius: 8px;
+    line-height: 2;
+
+    .nav__one {
+
+      &:hover {
+          cursor: pointer;
+          opacity: 0.8;
+          background: $main-color;
+          transition: 0.4s;
+      }
+    }
+}

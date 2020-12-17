@@ -76,11 +76,16 @@ button:focus {
 button:hover {
   cursor: pointer;
 }
+li {
+  list-style: none;
+}
+.contents {
+  margin-top: 40px;
+}
 .container__form {
   width: 600px;
   padding: 24px;
   margin: 0 auto;
-  margin-top: 40px;
   background: #fff;
   border-radius: 8px;
   color: #362f2f;
@@ -119,6 +124,66 @@ button:hover {
 }
 .container__form .form__btn {
   text-align: center;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  color: #362f2f;
+}
+.main {
+  width: 600px;
+}
+.main__title {
+  width: 600px;
+  padding-bottom: 8px;
+  margin: 0 auto;
+  margin-bottom: 16px;
+  border-bottom: solid 2px #362f2f;
+  font-size: 24px;
+}
+.main__user {
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+  color: #362f2f;
+  box-sizing: border-box;
+}
+.user {
+  box-sizing: border-box;
+}
+.user__prof {
+  display: flex;
+}
+.user__prof--img {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  margin-right: 40px;
+}
+.user__prof .info__one {
+  margin-bottom: 16px;
+}
+.user__prof .info__title {
+  width: 300px;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: solid 1px #362f2f;
+}
+.user__prof .info__value {
+  font-size: 20px;
+}
+.user__prof .info__count {
+  margin-top: 48px;
+}
+.user__msg {
+  height: 140px;
+  width: 550px;
+  padding: 8px;
+  margin-top: 40px;
+  border: solid 1px #362f2f;
+  border-radius: 10px;
+  box-sizing: border-box;
 }
 .header {
   width: 100%;
@@ -207,6 +272,22 @@ button:hover {
 .footer__bottom {
   padding-bottom: 16px;
   text-align: center;
+}
+.sidebar {
+  width: 140px;
+  height: 160px;
+  padding: 16px;
+  margin-top: 32px;
+  margin-right: 64px;
+  background: #fff;
+  border-radius: 8px;
+  line-height: 2;
+}
+.sidebar .nav__one:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  background: #b4cf9e;
+  transition: 0.4s;
 }
 body {
   background-color: #fdfcf4;

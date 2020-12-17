@@ -1,8 +1,10 @@
+.contents {
+  margin-top: 40px;
+}
 .container__form {
   width: 600px;
   padding: ;
   margin: 0 auto;
-  margin-top: 40px;
   background: ;
   border-radius: 8px;
   color: ;
@@ -41,4 +43,64 @@
 }
 .container__form .form__btn {
   text-align: center;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  color: ;
+}
+.main {
+  width: 600px;
+}
+.main__title {
+  width: 600px;
+  padding-bottom: ;
+  margin: 0 auto;
+  margin-bottom: ;
+  border-bottom: solid 2px ;
+  font-size: ;
+}
+.main__user {
+  padding: ;
+  background: ;
+  border-radius: 8px;
+  color: ;
+  box-sizing: border-box;
+}
+.user {
+  box-sizing: border-box;
+}
+.user__prof {
+  display: flex;
+}
+.user__prof--img {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  margin-right: 40px;
+}
+.user__prof .info__one {
+  margin-bottom: ;
+}
+.user__prof .info__title {
+  width: 300px;
+  padding-bottom: ;
+  margin-bottom: ;
+  border-bottom: solid 1px ;
+}
+.user__prof .info__value {
+  font-size: ;
+}
+.user__prof .info__count {
+  margin-top:  * 2;
+}
+.user__msg {
+  height: 140px;
+  width: 550px;
+  padding: ;
+  margin-top: 40px;
+  border: solid 1px ;
+  border-radius: 10px;
+  box-sizing: border-box;
 }
