@@ -18,9 +18,10 @@ $user_id = !empty($_SESSION['user_id']) ? $_SESSION['user_id'] : NULL;
         <?php
         } else {
         ?>
-          <li class="nav__one"><a href="logout.php">投稿</a></li>
-          <li class="nav__one"><a href="spot.php">スポット一覧</a></li>
+          <li class="nav__one"><a href="logout.php">ログアウト</a></li>
           <li class="nav__one"><a href="mypage.php">マイページ</a></li>
+          <li class="nav__one"><a href="spot.php">スポット一覧</a></li>
+          <li class="nav__one"><a href="registSpot.php">投稿</a></li>
         <?php
         }
         ?>

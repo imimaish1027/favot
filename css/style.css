@@ -223,14 +223,16 @@ li {
   right: 0;
   bottom: 0;
   margin: 0;
-  width: 480px;
+  width: 560px;
   height: 80px;
   list-style: none;
   line-height: 80px;
 }
 .header__nav .nav__one {
   height: 80px;
+  width: 148px;
   float: right;
+  text-align: center;
 }
 .header__nav .nav__one:hover {
   cursor: pointer;
