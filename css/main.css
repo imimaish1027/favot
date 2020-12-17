@@ -10,7 +10,9 @@
   color: ;
 }
 .container__form .title {
+  width: 400px;
   padding-bottom: ;
+  margin: 0 auto;
   margin-bottom: ;
   border-bottom: solid 2px ;
   text-align: center;
@@ -40,6 +42,11 @@
 .container__form .form .area-msg {
   margin-top: ;
   color: ;
+}
+.container__form .form__keep {
+  display: block;
+  margin-bottom: ;
+  text-align: center;
 }
 .container__form .form__btn {
   text-align: center;

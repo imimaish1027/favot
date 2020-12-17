@@ -91,8 +91,10 @@ li {
   color: #362f2f;
 }
 .container__form .title {
+  width: 400px;
   padding-bottom: 8px;
-  margin-bottom: 16px;
+  margin: 0 auto;
+  margin-bottom: 32px;
   border-bottom: solid 2px #362f2f;
   text-align: center;
   font-size: 24px;
@@ -121,6 +123,11 @@ li {
 .container__form .form .area-msg {
   margin-top: 8px;
   color: #a03;
+}
+.container__form .form__keep {
+  display: block;
+  margin-bottom: 24px;
+  text-align: center;
 }
 .container__form .form__btn {
   text-align: center;
@@ -213,7 +220,6 @@ li {
   pointer-events: auto;
 }
 .header__nav a {
-  padding: 10px 15px;
   text-decoration: none;
   font-weight: bold;
 }
@@ -230,7 +236,7 @@ li {
 }
 .header__nav .nav__one {
   height: 80px;
-  width: 148px;
+  width: 140px;
   float: right;
   text-align: center;
 }

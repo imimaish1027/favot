@@ -26,7 +26,6 @@
   pointer-events: auto;
 }
 .header__nav a {
-  padding: 10px 15px;
   text-decoration: none;
   font-weight: bold;
 }
@@ -43,7 +42,7 @@
 }
 .header__nav .nav__one {
   height: 80px;
-  width: 148px;
+  width: 140px;
   float: right;
   text-align: center;
 }
