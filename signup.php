@@ -81,13 +81,13 @@ require('head.php');
         <h1 class="title">新規会員登録</h1>
 
         <form action="" method="post" class="form">
-          <div class="form__one">
-            <div class="area-msg">
-              <?php
-              if (!empty($err_msg['common'])) echo $err_msg['common'];
-              ?>
-            </div>
+          <div class="area-msg">
+            <?php
+            if (!empty($err_msg['common'])) echo $err_msg['common'];
+            ?>
+          </div>
 
+          <div class="form__one">
             <label class="<?php if (!empty($err_msg['email'])) echo 'err'; ?>">
               <p class="form__title">メールアドレス</p>
               <input type="text" name="email" placeholder="メールアドレス" value="<?php if (!empty($_POST['email'])) echo $_POST['email']; ?>">

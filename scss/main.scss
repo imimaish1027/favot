@@ -50,11 +50,6 @@
         padding-bottom: $space_s;
       }
 
-      .area-msg {
-        margin-top: $space_s;
-        color: $valid-color;
-      }
-
       &__keep {
         display: block;
         margin-bottom: $space_l;
@@ -72,9 +67,8 @@
 .wrapper {
   display: flex;
   justify-content: center;
-
-      margin: 0 auto;
-      color: $font-color;
+  margin: 0 auto;
+  color: $font-color;
 }
 
 .main {
@@ -89,13 +83,95 @@
     font-size: $font-size_xl;
   }
 
-  &__user {
+  &__user,
+  &__form {
       padding: $space_l;
       background: $content-color;
       border-radius: 8px;
       color: $font-color;
       box-sizing: border-box;
   }
+
+  &__form {
+      margin-bottom: 40px;
+
+      .form {
+        &__title {
+            padding-bottom: $space_s;
+        }
+
+        &__one {
+            width: 240px;
+            margin: 0 auto;
+            margin-bottom: $space_l;
+
+            label {
+              display: block;
+            }
+
+            input {
+              width: 240px;
+              height: 32px;
+              box-sizing: border-box;
+            }
+
+            textarea {
+              width: 240px;
+              height: 120px;
+              box-sizing: border-box;
+            }
+
+            label.err input,
+            label.err select {
+              background: #f7dcd9;
+            }
+        }
+        &__btn {
+          text-align: center;
+        }
+      }
+
+      .imgDrop-container {
+          width: 100%;
+          height: 160px;
+          margin-bottom: $space_l;
+          box-sizing: border-box;
+          position: relative;
+
+        .area-drop {
+          width: 160px;
+          height: 160px;
+          background: #F2F2F2;
+          color: #ccc;
+          text-align: center;
+          line-height: 150px;
+          position: absolute;
+          left: 0;
+          right: 0;
+          margin: auto;
+          box-sizing: border-box;
+        }
+
+        .input-file {
+          opacity: 0;
+          width: 100%;
+          height: 160px;
+          position: absolute;
+          left: 0;
+          right: 0;
+          margin: auto;
+          z-index: 99999;
+        }
+        .prev-img {
+          width: 100%;
+          position: absolute;
+          left: 0;
+          right: 0;
+          margin: auto;
+        }
+
+      }
+    }
 }
 
 .user {
@@ -145,4 +221,13 @@
   }
 
   box-sizing: border-box;
+}
+
+.spot__form {
+    width: 600px;
+}
+
+.area-msg {
+    margin-top: $space_s;
+    color: $valid-color;
 }
