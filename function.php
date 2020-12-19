@@ -221,10 +221,96 @@ function getProduct($user_id, $spot_id)
     error_log('エラー発生:' . $e->getMessage());
   }
 }
+//スポット一覧取得
+function getSpotList($currentMinNum = 1, $sort, $span = 5)
+{
+  debug('スポット一覧を取得します。');
+  try {
+    $dbh = dbConnect();
+
+    switch ($sort) {
+      case 0:
+        $sql = 'SELECT id FROM spots ORDER BY create_date DESC';
+        break;
+      case 1:
+        $sql = 'SELECT id,COUNT(*) AS likes FROM spots INNER JOIN likes ON id = likes.spot_id GROUP BY spots.id ORDER BY likes DESC';
+        break;
+    }
+
+    $data = array();
+    $stmt = queryPost($dbh, $sql, $data);
+
+    $rst['total'] = $stmt->rowCount();
+    $rst['total_page'] = ceil($rst['total'] / $span);
+    debug('=========:' . print_r($rst, true));
+
+    if (!$stmt) {
+      return false;
+    }
+
+    switch ($sort) {
+      case 0:
+        $sql = 'SELECT spots.id, spots.name AS spot_name, spots.address, spots.comment, spots.tag, spots.pic AS spot_pic, users.name AS user_name, users.pic AS user_pic, spots.create_date FROM spots INNER JOIN users ON spots.user_id = users.id ORDER BY spots.create_date DESC';
+        break;
+      case 1:
+        $sql = 'SELECT spots.id, spots.name AS spot_name, spots.address, spots.comment, spots.tag, spots.pic AS spot_pic, users.name AS user_name, users.pic, COUNT(*) AS likes FROM spots INNER JOIN likes ON spots.id = likes.spot_id JOIN users ON spots.user_id = users.id GROUP BY spots.id ORDER BY likes DESC';
+        break;
+    }
+    $sql .= ' LIMIT ' . $span . ' OFFSET ' . $currentMinNum;
+    $data = array();
+    debug('SQL：' . $sql);
+    $stmt = queryPost($dbh, $sql, $data);
+
+    if ($stmt) {
+      $rst['data'] = $stmt->fetchAll();
+      return $rst;
+    } else {
+      return false;
+    }
+  } catch (Exception $e) {
+    error_log('エラー発生:' . $e->getMessage());
+  }
+}
+// ユーザー画像取得
+function getUserInPhoto($user_id)
+{
+  debug('ユーザー画像を取得します。');
+
+  try {
+    $dbh = dbConnect();
+    $sql = 'SELECT pic FROM users WHERE id = :u_id';
+    $data = array(':u_id' => $user_id);
+    $stmt = queryPost($dbh, $sql, $data);
+    $rst = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!empty($rst)) {
+      return $rst['pic'];
+    } else {
+      debug('写真の取得に失敗しました。');
+      return false;
+    }
+  } catch (Exception $e) {
+    error_log('エラー発生:' . $e->getMessage());
+  }
+}
 
 // ——————————————————————————————
 // その他
 // ——————————————————————————————
+// パラメータ付与
+function appendGetParam($arr_del_key = array())
+{
+  if (!empty($_GET)) {
+    $str = '?';
+    foreach ($_GET as $key => $val) {
+      if (!in_array($key, $arr_del_key, true)) {
+        $str .= $key . '=' . $val . '&';
+      }
+    }
+    $str = mb_substr($str, 0, -1);
+    return $str;
+  }
+}
 // 画像アップロード
 function uploadImg($file, $key)
 {
@@ -272,8 +358,56 @@ function uploadImg($file, $key)
     }
   }
 }
+//画像表示
+function showImg($path)
+{
+  if (empty($path)) {
+    return 'img/no-avatar.jpeg';
+  } else {
+    return $path;
+  }
+}
 // サニタイズ
 function sanitize($str)
 {
   return htmlspecialchars($str, ENT_QUOTES);
+}
+//ページネーション 
+function pagination($currentPageNum, $totalPageNum, $link = '', $pageColNum = 5)
+{
+  if ($totalPageNum <= 5) {
+    $minPageNum = 1;
+    $maxPageNum = $totalPageNum;
+    //総ページ数が5以上かつ現在のページが3,2,1の場合は1〜5を表示
+  } elseif ($currentPageNum <= 3) {
+    $minPageNum = 1;
+    $maxPageNum = 5;
+    //総ページ数が5以上かつ現在のページが総ページ-2,-1,-0の場合はラスト5個を表示
+  } elseif ($currentPageNum >= $totalPageNum - 2) {
+    $minPageNum = $totalPageNum - 4;
+    $maxPageNum = $totalPageNum;
+    //それ以外の場合は現在ページの前後2つを表示
+  } else {
+    $minPageNum = $currentPageNum - 2;
+    $maxPageNum = $currentPageNum + 2;
+  }
+
+  echo '<div class="pagination">';
+  echo '<ul class="pagination-list">';
+  if ($currentPageNum != 1) {     //現在のページが1以外の時
+    echo '<li class="list-item"><a href="?p=1' . $link . '">&lt;</a></li>';
+  }
+  for ($i = $minPageNum; $i <= $maxPageNum; $i++) { //表示ページネーションのMinページ数をMaxページ数になるまでプラス
+    echo '<li class="list-item ';
+    if ($currentPageNum == $i) {
+      echo 'active';
+    }
+    echo '"><a href="?p=' . $i . $link . '">' . $i . '</a></li>';
+  }
+
+  if ($currentPageNum != $maxPageNum && $maxPageNum > 1) {
+    echo '<li class="list-item"><a href="?p=' . $maxPageNum . $link . '">&gt;</a></li>';
+  }
+  echo '</ul>';
+  echo '</div>';
 }

@@ -262,6 +262,51 @@ li {
   margin-top: 8px;
   color: #a03;
 }
+.spot__list .spot__one {
+  width: 600px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background: #fff;
+  border: solid 1px #362f2f;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.spot__list .spot__one .spot__user {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+.spot__list .spot__one .spot__user .user__create__day {
+  margin-left: auto;
+}
+.spot__list .spot__one .spot__info {
+  display: flex;
+}
+.spot__list .spot__one .spot__info .spot__detail {
+  width: 100%;
+  margin-left: 16px;
+}
+.spot__list .spot__one .spot__info .spot__detail__one {
+  margin-bottom: 16px;
+}
+.spot__list .spot__one .spot__info .spot__title {
+  padding-bottom: 8px;
+  border-bottom: solid 2px #362f2f;
+  font-size: 20px;
+}
+.spot__list .spot__one .spot__info .spot__address {
+  display: flex;
+  align-items: center;
+}
+.spot__list .spot__img {
+  height: 140px;
+  width: 140px;
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
 .header {
   width: 100%;
   height: 80px;
