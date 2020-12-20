@@ -200,7 +200,7 @@ function getFormData($str, $flg = false)
   }
 }
 // 1個のスポット情報取得
-function getProduct($user_id, $spot_id)
+function getSpot($user_id, $spot_id)
 {
   debug('スポット情報を取得します。');
   debug('ユーザーID:' . $user_id);
@@ -310,6 +310,11 @@ function appendGetParam($arr_del_key = array())
     $str = mb_substr($str, 0, -1);
     return $str;
   }
+}
+// 並び順パラメータ付与
+function append($url, $par)
+{
+  return 'spotList.php?' . $par;
 }
 // 画像アップロード
 function uploadImg($file, $key)

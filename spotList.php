@@ -39,6 +39,10 @@ require('head.php');
     <section class="wrapper">
       <div class="main">
         <h1 class="main__title">スポット一覧</h1>
+        <div class="sort__order">
+          【　<a href="<?php echo (append($url_, 'sort=0')) ?>" class=<?php echo (strpos($url, 'sort=0')) ? 'sort-active' : ''; ?>> 新着順</a>　|　
+          <a href="<?php echo (append($url_, 'sort=1')) ?>" class=<?php echo (strpos($url, 'sort=1')) ? 'sort-active' : ''; ?>>いいね数順</a>　】
+        </div>
 
         <div class="spot__list">
           <?php
@@ -58,7 +62,7 @@ require('head.php');
                   </div>
                 </div>
                 <div class="spot__info">
-                  <img src="<?php echo sanitize($val['spot_pic']); ?>" alt="<?php echo sanitize($val['spot_name']) . "の画像"; ?>" class="spot__img">
+                  <img src="uploads/<?php echo sanitize($val['spot_pic']); ?>" alt="<?php echo sanitize($val['spot_name']) . "の画像"; ?>" class="spot__img">
                   <div class="spot__detail">
                     <p class="spot__title spot__detail__one"><?php echo sanitize($val['spot_name']); ?></p>
                     <div class="spot__address spot__detail__one">
@@ -76,7 +80,7 @@ require('head.php');
           ?>
         </div>
 
-        <?php pagination($currentPageNum, $dbProductData['total_page']); ?>
+        <?php pagination($current_page_num, $db_spot_data['total_page']); ?>
 
       </div>
     </section>
