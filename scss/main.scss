@@ -317,3 +317,42 @@
   background: rgb(100, 100, 100);
   color: #fff;
 }
+
+/*ページネーション*/
+.pagination-list {
+  position: relative;
+  left: 50%;
+  float: left;
+  padding-left: 0;
+  margin-bottom: $space_m;
+  list-style: none;
+}
+
+.pagination .list-item {
+  position: relative;
+  left: -50%;
+  float: left;
+  margin-right: 5px;
+}
+
+.pagination .list-item:last-child {
+  margin-right: 0;
+}
+
+.pagination .list-item a {
+  display: block;
+  padding: 5px 10px;
+  background: #eee;
+  color: $font-color;
+  text-decoration: none;
+}
+
+.pagination .list-item.active a {
+  background: $font-color;
+  color: #FFFFFF;
+}
+
+.pagination .list-item a:hover {
+  background: #333;
+  color: #FFFFFF;
+}

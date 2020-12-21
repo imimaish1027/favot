@@ -40,7 +40,7 @@ require('head.php');
       <div class="main">
         <h1 class="main__title">スポット一覧</h1>
         <div class="sort__order">
-          【　<a href="<?php echo (append($url_, 'sort=0')) ?>" class=<?php echo (strpos($url, 'sort=0')) ? 'sort-active' : ''; ?>> 新着順</a>　|　
+          【　<a href="<?php echo (append($url_, 'sort=0')) ?>" class=<?php echo (strpos($url, 'sort=0')) ? 'sort-active' : ''; ?>>新着順</a>　|　
           <a href="<?php echo (append($url_, 'sort=1')) ?>" class=<?php echo (strpos($url, 'sort=1')) ? 'sort-active' : ''; ?>>いいね数順</a>　】
         </div>
 
