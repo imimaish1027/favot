@@ -302,6 +302,53 @@ li {
   height: 140px;
   width: 140px;
 }
+.spot {
+  width: 600px;
+  padding: 16px;
+  margin: 0 auto;
+  margin-bottom: 16px;
+  background: #fff;
+  box-sizing: border-box;
+}
+.spot__info {
+  display: flex;
+  margin-bottom: 16px;
+}
+.spot__detail {
+  width: 100%;
+}
+.spot__detail__one {
+  margin-bottom: 16px;
+  display: flex;
+}
+.spot__title {
+  width: 100%;
+  padding-bottom: 8px;
+  border-bottom: solid 2px #362f2f;
+  font-size: 20px;
+}
+.spot__img {
+  width: 200px;
+  height: 200px;
+  margin-right: 16px;
+}
+.spot .user__day {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.spot .user__day__one {
+  display: flex;
+  align-items: center;
+}
+.spot .user__comment {
+  margin-bottom: 16px;
+}
+.spot .btn__area {
+  display: flex;
+  justify-content: flex-end;
+}
 .avatar {
   width: 40px;
   height: 40px;

@@ -293,12 +293,67 @@
   }
 }
 
+// スポット詳細
+.spot {
+        width: 600px;
+        padding: $space_m;
+        margin: 0 auto;
+        margin-bottom: $space_m;
+        background: #ffffff;
+        box-sizing: border-box;
+  &__info {
+    display: flex;
+    margin-bottom: $space_m;
+  }
+  &__detail {
+    width: 100%;
+    &__one {
+      margin-bottom: $space_m;
+      display: flex;
+    }
+  }
+  &__title {
+    width: 100%;
+    padding-bottom: $space_s;
+    border-bottom: solid 2px $font-color;
+    font-size: $font-size_l;
+  }
+  &__img {
+    width: 200px;
+    height: 200px;
+    margin-right: $space_m;
+  }
+  .user__day {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $space_m;
+
+      &__one {
+        display: flex;
+        align-items: center;
+      }
+      &__create {
+
+      }
+
+  }
+  .user__comment {
+    margin-bottom: $space_m;
+  }
+  .btn__area {
+      display: flex;
+      justify-content: flex-end;
+  }
+}
+
 .avatar {
   width: 40px;
   height: 40px;
   border-radius: 20px;
 }
 
+// 並び替え
 .sort__order {
   margin-bottom: $space_m;
   font-size: 16px;

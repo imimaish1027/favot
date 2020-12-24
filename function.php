@@ -271,6 +271,66 @@ function getSpotList($currentMinNum = 1, $sort, $span = 5)
     error_log('エラー発生:' . $e->getMessage());
   }
 }
+//スポット詳細情報取得
+function getSpotOne($spot_id)
+{
+  debug('スポット情報を取得します。');
+  debug('スポットID：' . $spot_id);
+
+  try {
+    $dbh = dbConnect();
+    $sql = 'SELECT * FROM spots WHERE id = :spot_id AND delete_flg = 0';
+    $data = array(':spot_id' => $spot_id);
+    $stmt = queryPost($dbh, $sql, $data);
+
+    if ($stmt) {
+      return $stmt->fetch(PDO::FETCH_ASSOC);
+    } else {
+      return false;
+    }
+  } catch (Exception $e) {
+    error_log('エラー発生:' . $e->getMessage());
+  }
+}
+function getSpotUser($spot_id)
+{
+  debug('スポットのユーザー情報を取得します。');
+
+  try {
+    $dbh = dbConnect();
+    $sql = 'SELECT users.name AS user_name, users.pic AS user_pic FROM users INNER JOIN spots ON users.id = spots.user_id WHERE spots.id = :spot_id';
+    $data = array(':spot_id' => $spot_id);
+    $stmt = queryPost($dbh, $sql, $data);
+
+    if ($stmt) {
+      return $stmt->fetch(PDO::FETCH_ASSOC);
+    } else {
+      return false;
+    }
+  } catch (Exception $e) {
+    error_log('エラー発生:' . $e->getMessage());
+  }
+}
+//ユーザー情報取得
+function getUser($user_id)
+{
+  debug('ユーザー情報を取得します');
+
+  try {
+    $dbh = dbConnect();
+    $sql = 'SELECT * FROM users WHERE id = :user_id';
+    $data = array(':user_id' => $user_id);
+    $stmt = queryPost($dbh, $sql, $data);
+
+    if ($stmt) {
+      return $stmt->fetch(PDO::FETCH_ASSOC);
+    } else {
+      return false;
+    }
+  } catch (Exception $e) {
+    error_log('エラー発生:' . $e->getMessage());
+  }
+}
 // ユーザー画像取得
 function getUserInPhoto($user_id)
 {
@@ -287,6 +347,33 @@ function getUserInPhoto($user_id)
       return $rst['pic'];
     } else {
       debug('写真の取得に失敗しました。');
+      return false;
+    }
+  } catch (Exception $e) {
+    error_log('エラー発生:' . $e->getMessage());
+  }
+}
+//(コメント欄)メッセージ情報取得
+function getMessages($id)
+{
+  debug('メッセージ情報を取得します。');
+
+  try {
+    $dbh = dbConnect();
+    $sql = 'SELECT * FROM spots WHERE id = :id';
+    $data = array(':id' => $id);
+    $stmt = queryPost($dbh, $sql, $data);
+    $rst = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!empty($rst)) {
+      debug('メッセージを取得します。');
+      $sql = 'SELECT * FROM comments WHERE spot_id = :id AND delete_flg = 0 ORDER BY create_date ASC';
+      $data = array(':id' => $id);
+      $stmt = queryPost($dbh, $sql, $data);
+      $rst['msg'] = $stmt->fetchAll();
+      return $rst;
+    } else {
+      debug('スポット情報の取得に失敗しました。');
       return false;
     }
   } catch (Exception $e) {
@@ -370,6 +457,32 @@ function showImg($path)
     return 'img/no-avatar.jpeg';
   } else {
     return $path;
+  }
+}
+//メッセージ送信
+function msgSend($comment, $spot_id)
+{
+  validRequired($comment, 'comment');
+  validMaxLen($comment, 'comment', 250);
+
+  if (empty($err_msg)) {
+    debug('メッセージ送信の準備ができました。');
+
+    try {
+      $dbh = dbConnect();
+      $sql = 'INSERT INTO comments(spot_id,user_id,comment,create_date) VALUES(:spot_id,:user_id,:comment,:create_date)';
+      $data = array(':spot_id' => $spot_id, ':user_id' => $_SESSION['user_id'], ':comment' => $comment, ':create_date' => date('Y-m-d H:i:s'));
+      $stmt = queryPost($dbh, $sql, $data);
+
+      if ($stmt) {
+        $_POST = array(); //postをクリア
+        debug('メッセージ送信が完了しました。連絡掲示板へ遷移します。');
+        header("Location: " . $_SERVER['PHP_SELF'] . '?spot_id=' . $spot_id); //自分自身に遷移する
+      }
+    } catch (Exception $e) {
+      error_log('エラー発生：' . $e->getMessage());
+      $err_msg['common'] = MSG07;
+    }
   }
 }
 // サニタイズ

@@ -49,7 +49,7 @@ require('head.php');
           foreach ($db_spot_data['data'] as $key => $val) :
           ?>
             <div class="spot__one">
-              <a href="spotDetail.php<?php echo (!empty(appendGetParam())) ? appendGetParam() . '&p_id=' . $val['id'] : '?p_id=' . $val['id']; ?>" class="spot__panel">
+              <a href="spotDetail.php<?php echo (!empty(appendGetParam())) ? appendGetParam() . '&spot_id=' . $val['id'] : '?spot_id=' . $val['id']; ?>" class="spot__panel">
                 <div class="spot__user">
                   <div class="user__avatar">
                     <img src="<?php print_r(showImg(getUserInPhoto($val['user_id']))); ?>" alt="" class="avatar">
