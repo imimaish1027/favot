@@ -11,8 +11,10 @@ $spot_id = (!empty($_GET['spot_id'])) ? $_GET['spot_id'] : '';
 $user_info = getUser($user_id);
 $spot_info = getSpotOne($spot_id);
 $spot_user_info = getSpotUser($spot_id);
-debug('スポットユーザー：' . print_r($spot_user_info, true));
-$msg_data = getMessages($spot_id);
+$comment_data = getComments($spot_id);
+debug('◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆' . print_r($comment_data, true));
+$comment_amount = countComments($spot_id);
+debug('◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆' . print_r($comment_amount, true));
 
 if (empty($spot_info)) {
   error_log('エラー発生：指定ページに不正な値が入りました。');
@@ -24,8 +26,8 @@ if (!empty($_POST['comment'])) {
 
   require('auth.php');
 
-  $msg = (!empty($_POST['comment'])) ? $_POST['comment'] : '';
-  msgSend($comment, $spot_id);
+  $comment = (!empty($_POST['comment'])) ? $_POST['comment'] : '';
+  commentSend($comment, $spot_id);
 }
 
 debug('デバッグログ終了');
@@ -85,20 +87,36 @@ require('head.php');
         </div>
 
         <div class="comment">
-          <h2 class="comment__title">コメント 件</h2>
-          <div class="comment__one">
-            <div class="user__day">
-              <div class="user__day__one"></div>
-              <div class="user__day__create">
-                <?php echo substr(sanitize($spot_info['create_date']), 0, 10); ?>
-              </div>
-              <div class="comment__detail"></div>
-            </div>
-          </div>
+          <h2 class="comment__title"><?php echo $comment_amount ?></h2>
 
-          <div class="area-send-msg">
-            <form action="" method="post">
-              <textarea name="msg" cols="30" rows="3"></textarea>
+          <?php
+          foreach ($comment_data as $key => $val) {
+          ?>
+            <div class="comment__one">
+              <div class="user__day">
+                <div class="user__day__one">
+                  <div class="user__avatar">
+                    <img src="<?php echo isset($val['pic']) ? sanitize("uploads/" . $spot_user_info['user_pic']) : "img/no-avatar.jpeg"; ?>" alt="" class="avatar">
+                  </div>
+                  <div class="user__name">
+                    <?php echo sanitize($val['name']); ?>
+                  </div>
+                </div>
+                <div class="user__day__create">
+                  <?php echo substr(sanitize($val['create_date']), 0, 10); ?>
+                </div>
+              </div>
+              <div class="comment__detail">
+                <?php echo sanitize($val['comment']); ?>
+              </div>
+            </div>
+          <?php
+          }
+          ?>
+
+          <div class="area__send__comment">
+            <form action="" method="post" class="comment__area">
+              <textarea name="comment" cols="50" rows="" class="msg"></textarea>
               <input type="submit" value="送信" class="btn btn-send">
             </form>
           </div>

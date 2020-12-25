@@ -268,6 +268,40 @@
   display: flex;
   justify-content: flex-end;
 }
+.comment__title {
+  width: 600px;
+  padding-bottom: ;
+  margin: 0 auto;
+  margin-bottom: ;
+  border-bottom: solid 1px ;
+}
+.comment__one {
+  padding: ;
+  margin: 0 auto;
+  margin-bottom: ;
+  background: #fff;
+  box-sizing: border-box;
+}
+.comment .user__day {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: ;
+}
+.comment .user__day__one {
+  display: flex;
+  align-items: center;
+}
+.comment .area__send__comment {
+  margin-top: ;
+  margin-bottom: ;
+}
+.comment .area__send__comment .comment__area {
+  display: flex;
+}
+.comment .area__send__comment .comment__area .msg {
+  margin-right: ;
+}
 .avatar {
   width: 40px;
   height: 40px;

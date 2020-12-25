@@ -353,31 +353,77 @@ function getUserInPhoto($user_id)
     error_log('エラー発生:' . $e->getMessage());
   }
 }
-//(コメント欄)メッセージ情報取得
-function getMessages($id)
+// コメント取得
+function getComments($spot_id)
 {
-  debug('メッセージ情報を取得します。');
+  debug('コメントを取得します。');
 
   try {
     $dbh = dbConnect();
-    $sql = 'SELECT * FROM spots WHERE id = :id';
-    $data = array(':id' => $id);
+
+    $sql = 'SELECT users.name, users.pic, comments.comment, comments.create_date FROM comments JOIN spots ON comments.spot_id = spots.id JOIN users ON comments.user_id = users.id WHERE spots.id = :id ORDER BY create_date ASC';
+    $data = array(':id' => $spot_id);
     $stmt = queryPost($dbh, $sql, $data);
-    $rst = $stmt->fetch(PDO::FETCH_ASSOC);
+    $rst['comment'] = $stmt->fetchAll();
 
     if (!empty($rst)) {
-      debug('メッセージを取得します。');
-      $sql = 'SELECT * FROM comments WHERE spot_id = :id AND delete_flg = 0 ORDER BY create_date ASC';
-      $data = array(':id' => $id);
-      $stmt = queryPost($dbh, $sql, $data);
-      $rst['msg'] = $stmt->fetchAll();
-      return $rst;
+
+      return $rst['comment'];
     } else {
-      debug('スポット情報の取得に失敗しました。');
+      debug('コメントの取得に失敗しました。');
       return false;
     }
   } catch (Exception $e) {
     error_log('エラー発生:' . $e->getMessage());
+  }
+}
+// コメントカウント
+function countComments($spot_id)
+{
+  debug('コメントの数をカウントします。');
+
+  try {
+    $dbh = dbConnect();
+
+    $sql = 'SELECT COUNT(*) AS amount FROM comments JOIN spots ON comments.spot_id = spots.id WHERE spots.id = :id';
+    $data = array(':id' => $spot_id);
+    $stmt = queryPost($dbh, $sql, $data);
+    $count = $stmt->fetch(PDO::FETCH_COLUMN);
+
+    if (isset($count)) {
+      return "コメント　" . $count . "件";
+    } else {
+      debug('コメントのカウントに失敗しました。');
+      return false;
+    }
+  } catch (Exception $e) {
+    error_log('エラー発生:' . $e->getMessage());
+  }
+}
+// コメント送信
+function commentSend($comment, $spot_id)
+{
+  validRequired($comment, 'comment');
+  validMaxLen($comment, 'comment', 100);
+
+  if (empty($err_msg)) {
+    debug('メッセージ送信の準備ができました。');
+
+    try {
+      $dbh = dbConnect();
+      $sql = 'INSERT INTO comments(spot_id,user_id,comment,create_date) VALUES(:spot_id,:user_id,:comment,:create_date)';
+      $data = array(':spot_id' => $spot_id, ':user_id' => $_SESSION['user_id'], ':comment' => $comment, ':create_date' => date('Y-m-d H:i:s'));
+      $stmt = queryPost($dbh, $sql, $data);
+
+      if ($stmt) {
+        $_POST = array();
+        debug('メッセージ送信が完了しました。');
+        header("Location: " . $_SERVER['PHP_SELF'] . '?spot_id=' . $spot_id);
+      }
+    } catch (Exception $e) {
+      error_log('エラー発生：' . $e->getMessage());
+      $err_msg['common'] = MSG07;
+    }
   }
 }
 

@@ -347,6 +347,52 @@
   }
 }
 
+// コメント
+.comment {
+  &__title {
+    width: 600px;
+    padding-bottom: $space_s;
+    margin: 0 auto;
+    margin-bottom: $space_m;
+    border-bottom: solid 1px $font-color;
+  }
+
+  &__one {
+        padding: $space_m;
+        margin: 0 auto;
+        margin-bottom: $space_m;
+        background: #ffffff;
+        box-sizing: border-box;
+  }
+
+  .user__day {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $space_m;
+
+    &__one {
+      display: flex;
+      align-items: center;
+    }
+
+      &__create {}
+  }
+
+  .area__send__comment {
+    margin-top: $space_m;
+    margin-bottom: $space_xl;
+
+    .comment__area {
+      display: flex;
+
+      .msg {
+        margin-right: $space_m;
+      }
+    }
+  }
+}
+
 .avatar {
   width: 40px;
   height: 40px;
