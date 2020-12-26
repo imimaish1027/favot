@@ -30,7 +30,6 @@ if (!empty($_POST['comment'])) {
 
 if (!empty($_POST['delete'])) {
   debug('POST送信があります。');
-  //$b_id = $_POST['buy_del'];
 
   try {
     $dbh = dbConnect();
@@ -49,6 +48,13 @@ if (!empty($_POST['delete'])) {
     error_log('エラー発生：' . $e->getMessage());
     $err_msg['common'] = MSG07;
   }
+}
+
+
+if (!empty($_POST['edit'])) {
+  debug('POST送信があります。');
+
+  header('Location:registSpot.php?spot_id=' . $spot_id);
 }
 
 debug('デバッグログ終了');
@@ -103,7 +109,7 @@ require('head.php');
             <div class="form__btn">
               <form action="" method="post">
                 <input type="submit" class="btn btn-mid" value="削除" name="delete">
-                <input type="submit" class="btn btn-mid" value="編集">
+                <input type="submit" class="btn btn-mid" value="編集" name="edit">
               </form>
             </div>
           </div>

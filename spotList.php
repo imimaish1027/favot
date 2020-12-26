@@ -16,7 +16,7 @@ $url = $_SERVER["REQUEST_URI"];
 $list_span = 5;
 // 現在の表示レコード先頭を算出
 $current_min_num = (($current_page_num - 1) * $list_span);
-// DBから商品データを取得
+// DBかスポットデータを取得
 $db_spot_data = getSpotList($current_min_num, $sort);
 debug('スポットデータ：' . print_r($db_spot_data, true));
 

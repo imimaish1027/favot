@@ -8,15 +8,15 @@ debugLogStart();
 
 require("auth.php");
 
-$spot_id = (!empty($_GET['spot_id'])) ? $_GET['spot_id'] : '';
-$dbFormData = (!empty($spot_id)) ? getProduct($_SESSION['user_id'], $spot_id) : '';
-$edit_flg = (empty($dbFormdata)) ? false : true;
+$spot_id = (isset($_GET['spot_id'])) ? $_GET['spot_id'] : '';
+$db_form_data = (!empty($spot_id)) ? getSpot($_SESSION['user_id'], $spot_id) : '';
+$edit_flg = (empty($db_form_data)) ? false : true;
 
 debug('スポットID：' . $spot_id);
-debug('フォーム用DBデータ：' . print_r($dbFormData, true));
+debug('フォーム用DBデータ：' . print_r($db_form_data, true));
 
-if (!empty($spot_id) && empty($dbFormData)) {
-  debug('GETパラメータの商品IDが違います。マイページへ遷移します。');
+if (!empty($spot_id) && empty($db_form_data)) {
+  debug('GETパラメータのスポットIDが違います。マイページへ遷移します。');
   header('Location:mypage.php');
 }
 
@@ -31,20 +31,20 @@ if (!empty($_POST)) {
   $tag = $_POST['tag'];
 
   $pic = (!empty($_FILES['pic']['name'])) ? uploadImg($_FILES['pic'], 'pic') : '';
-  $pic = (empty($pic1) && !empty($dbFormData['pic'])) ? $dbFormData['pic'] : $pic;
+  $pic = (empty($pic) && !empty($db_form_data['pic'])) ? $db_form_data['pic'] : $pic;
 
-  if (empty($dbFormData)) {
+  if (empty($db_form_data)) {
     validRequired($name, 'name');
     validRequired($address, 'address');
     validMaxLen($name, 'name', 20);
     validMaxLen($address, 'address', 20);
     validMaxLen($comment, 'comment', 500);
   } else {
-    if ($dbFormData['name'] !== $name) {
+    if ($db_form_data['name'] !== $name) {
       validRequired($name, 'name');
       validMaxLen($name, 'name');
     }
-    if ($dbFormData['comment'] !== $comment) {
+    if ($db_form_data['comment'] !== $comment) {
       validMaxLen($comment, 'comment');
     }
   }
@@ -70,8 +70,8 @@ if (!empty($_POST)) {
 
       if ($stmt) {
         //$_SESSION['msg_success'] = SUC04;
-        debug("マイページへ遷移します。");
-        header("Location:mypage.php");
+        debug("スポット一覧へ遷移します。");
+        header("Location:spotList.php");
       }
     } catch (Exception $e) {
       error_log('エラー発生；' . $e->getMessage());
@@ -114,7 +114,7 @@ require('head.php');
             <div class="form__one">
               <label class="<?php if (!empty($err_msg['name'])) echo 'err'; ?>">
                 <p class="form__title">スポット名</p>
-                <input type="text" name="name">
+                <input type="text" name="name" value="<?php echo $db_form_data['name'] ?>">
               </label>
               <div class="area-msg">
                 <?php
@@ -126,7 +126,7 @@ require('head.php');
             <div class="form__one">
               <label class="<?php if (!empty($err_msg['address'])) echo 'err'; ?>">
                 <p class="form__title">場所</p>
-                <input type="text" name="address">
+                <input type="text" name="address" value="<?php echo $db_form_data['address'] ?>">
               </label>
               <div class="area-msg">
                 <?php
@@ -152,7 +152,7 @@ require('head.php');
             <div class="form__one">
               <label class="<?php if (!empty($err_msg['tag'])) echo 'err'; ?>">
                 <p class="form__title">タグ</p>
-                <input type="text" name="tag">
+                <input type="text" name="tag" value="<?php echo $db_form_data['tag'] ?>">
               </label>
 
               <div class="area-msg">
@@ -166,7 +166,7 @@ require('head.php');
               <label class="area-drop <?php if (!empty($err_msg['pic'])) echo 'err'; ?>">
                 <input type="hidden" name="MAX_FILE_SIZE" value="3145728">
                 <input type="file" name="pic" class="input-file">
-                <img src="<?php echo getFormData('pic'); ?>" alt="" class="prev-img" style="<?php if (empty(getFormData('pic'))) echo 'display:none;' ?>">
+                <img src="uploads/<?php echo getFormData('pic'); ?>" alt="" class="prev-img" style="<?php if (empty(getFormData('pic'))) echo 'display:none;' ?>">
                 ドラッグ＆ドロップ
               </label>
               <div class="area-msg">

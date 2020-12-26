@@ -177,20 +177,20 @@ function getFormData($str, $flg = false)
   } else {
     $method = $_POST;
   }
-  global $dbFormData, $err_msg;
+  global $db_form_data, $err_msg;
 
-  if (!empty($dbFormData)) {
+  if (!empty($db_form_data)) {
     if (!empty($err_msg[$str])) {
       if (isset($method[$str])) {
         return sanitize($method[$str]);
       } else {
-        return sanitize($dbFormData[$str]);
+        return sanitize($db_form_data[$str]);
       }
     } else {
-      if (isset($method[$str]) && $method[$str] !== $dbFormData[$str]) {
+      if (isset($method[$str]) && $method[$str] !== $db_form_data[$str]) {
         return sanitize($method[$str]);
       } else {
-        return sanitize($dbFormData[$str]);
+        return sanitize($db_form_data[$str]);
       }
     }
   } else {
@@ -208,8 +208,8 @@ function getSpot($user_id, $spot_id)
 
   try {
     $dbh = dbConnect();
-    $sql = 'SELECT * FROM spots WHERE user_id=:u_id AND id=:s_id AND delete_flg = 0';
-    $data = array(':u_id' => $user_id, ':p_id' => $spot_id);
+    $sql = 'SELECT * FROM spots WHERE user_id=:user_id AND id=:spot_id AND delete_flg = 0';
+    $data = array(':user_id' => $user_id, ':spot_id' => $spot_id);
     $stmt = queryPost($dbh, $sql, $data);
 
     if ($stmt) {
@@ -242,7 +242,6 @@ function getSpotList($currentMinNum = 1, $sort, $span = 5)
 
     $rst['total'] = $stmt->rowCount();
     $rst['total_page'] = ceil($rst['total'] / $span);
-    debug('=========:' . print_r($rst, true));
 
     if (!$stmt) {
       return false;
