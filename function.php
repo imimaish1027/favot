@@ -221,7 +221,7 @@ function getSpot($user_id, $spot_id)
     error_log('エラー発生:' . $e->getMessage());
   }
 }
-//スポット一覧取得
+// スポット一覧取得
 function getSpotList($currentMinNum = 1, $sort, $span = 5)
 {
   debug('スポット一覧を取得します。');
@@ -230,10 +230,10 @@ function getSpotList($currentMinNum = 1, $sort, $span = 5)
 
     switch ($sort) {
       case 0:
-        $sql = 'SELECT id FROM spots ORDER BY create_date DESC';
+        $sql = 'SELECT id FROM spots WHERE delete_flg = 0 ORDER BY create_date DESC';
         break;
       case 1:
-        $sql = 'SELECT id,COUNT(*) AS likes FROM spots INNER JOIN likes ON id = likes.spot_id GROUP BY spots.id ORDER BY likes DESC';
+        $sql = 'SELECT id,COUNT(*) AS likes FROM spots INNER JOIN likes ON id = likes.spot_id WHERE spots.delete_flg = 0 GROUP BY spots.id ORDER BY likes DESC';
         break;
     }
 
@@ -250,10 +250,10 @@ function getSpotList($currentMinNum = 1, $sort, $span = 5)
 
     switch ($sort) {
       case 0:
-        $sql = 'SELECT spots.id, spots.name AS spot_name, spots.address, spots.comment, spots.tag, spots.pic AS spot_pic, users.name AS user_name, users.pic AS user_pic, spots.create_date FROM spots INNER JOIN users ON spots.user_id = users.id ORDER BY spots.create_date DESC';
+        $sql = 'SELECT spots.id, spots.name AS spot_name, spots.address, spots.comment, spots.tag, spots.pic AS spot_pic, users.name AS user_name, users.pic AS user_pic, spots.create_date FROM spots INNER JOIN users ON spots.user_id = users.id WHERE spots.delete_flg = 0 ORDER BY spots.create_date DESC';
         break;
       case 1:
-        $sql = 'SELECT spots.id, spots.name AS spot_name, spots.address, spots.comment, spots.tag, spots.pic AS spot_pic, users.name AS user_name, users.pic, COUNT(*) AS likes FROM spots INNER JOIN likes ON spots.id = likes.spot_id JOIN users ON spots.user_id = users.id GROUP BY spots.id ORDER BY likes DESC';
+        $sql = 'SELECT spots.id, spots.name AS spot_name, spots.address, spots.comment, spots.tag, spots.pic AS spot_pic, users.name AS user_name, users.pic, COUNT(*) AS likes FROM spots INNER JOIN likes ON spots.id = likes.spot_id JOIN users ON spots.user_id = users.id WHERE spots.delete_flg = 0 GROUP BY spots.id ORDER BY likes DESC';
         break;
     }
     $sql .= ' LIMIT ' . $span . ' OFFSET ' . $currentMinNum;
@@ -271,7 +271,7 @@ function getSpotList($currentMinNum = 1, $sort, $span = 5)
     error_log('エラー発生:' . $e->getMessage());
   }
 }
-//スポット詳細情報取得
+// スポット詳細情報取得
 function getSpotOne($spot_id)
 {
   debug('スポット情報を取得します。');
@@ -311,7 +311,7 @@ function getSpotUser($spot_id)
     error_log('エラー発生:' . $e->getMessage());
   }
 }
-//ユーザー情報取得
+// ユーザー情報取得
 function getUser($user_id)
 {
   debug('ユーザー情報を取得します');

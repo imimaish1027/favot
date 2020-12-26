@@ -12,9 +12,7 @@ $user_info = getUser($user_id);
 $spot_info = getSpotOne($spot_id);
 $spot_user_info = getSpotUser($spot_id);
 $comment_data = getComments($spot_id);
-debug('◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆' . print_r($comment_data, true));
 $comment_amount = countComments($spot_id);
-debug('◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆' . print_r($comment_amount, true));
 
 if (empty($spot_info)) {
   error_log('エラー発生：指定ページに不正な値が入りました。');
@@ -28,6 +26,29 @@ if (!empty($_POST['comment'])) {
 
   $comment = (!empty($_POST['comment'])) ? $_POST['comment'] : '';
   commentSend($comment, $spot_id);
+}
+
+if (!empty($_POST['delete'])) {
+  debug('POST送信があります。');
+  //$b_id = $_POST['buy_del'];
+
+  try {
+    $dbh = dbConnect();
+    $sql = 'UPDATE spots SET delete_flg = 1 WHERE id=:spot_id';
+    $data = array(':spot_id' => $spot_id);
+    $stmt = queryPost($dbh, $sql, $data);
+
+    if ($stmt) {
+      debug('スポットを削除します。');
+      header('Location:spotList.php');
+    } else {
+      debug('クエリが失敗しました。');
+      $err_msg['common'] = MSG07;
+    }
+  } catch (Exception $e) {
+    error_log('エラー発生：' . $e->getMessage());
+    $err_msg['common'] = MSG07;
+  }
 }
 
 debug('デバッグログ終了');
@@ -80,8 +101,10 @@ require('head.php');
           <div class="user__comment"><?php echo sanitize($spot_info['comment']); ?></div>
           <div class="btn__area" style="<?php echo ($user_id !== $spot_info['user_id']) ? 'display: none;' : ''; ?>">
             <div class="form__btn">
-              <input type="submit" class="btn btn-mid" value="削除">
-              <input type="submit" class="btn btn-mid" value="編集">
+              <form action="" method="post">
+                <input type="submit" class="btn btn-mid" value="削除" name="delete">
+                <input type="submit" class="btn btn-mid" value="編集">
+              </form>
             </div>
           </div>
         </div>

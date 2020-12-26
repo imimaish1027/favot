@@ -11,6 +11,9 @@ button:focus {
 button:hover {
   cursor: pointer;
 }
+.btn:hover {
+  cursor: pointer;
+}
 li {
   list-style: none;
 }
