@@ -19,6 +19,7 @@
     width: 600px;
     padding: $space_l;
     margin: 0 auto;
+    margin-bottom: $space_m;
     background: $content-color;
     border-radius: 8px;
     color: $font-color;
@@ -59,8 +60,21 @@
       &__btn {
         text-align: center;
       }
-    }
 
+      .form__withdraw__intro {
+        text-align: center;
+        margin-bottom: $space_xl;
+      }
+    }
+  }
+  .to__mypage {
+    margin: 0 auto;
+    margin-top: $space_xl;
+    text-align: center;
+
+    &:hover {
+      opacity: 0.6;
+    }
   }
 }
 

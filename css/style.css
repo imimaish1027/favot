@@ -89,6 +89,7 @@ li {
   width: 600px;
   padding: 24px;
   margin: 0 auto;
+  margin-bottom: 16px;
   background: #fff;
   border-radius: 8px;
   color: #362f2f;
@@ -130,6 +131,18 @@ li {
 }
 .container__form .form__btn {
   text-align: center;
+}
+.container__form .form .form__withdraw__intro {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.container .to__mypage {
+  margin: 0 auto;
+  margin-top: 32px;
+  text-align: center;
+}
+.container .to__mypage:hover {
+  opacity: 0.6;
 }
 .wrapper {
   display: flex;

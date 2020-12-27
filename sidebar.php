@@ -4,6 +4,7 @@
     <li class="nav__one"><a href="favorite.php">いいね一覧</a></li>
     <li class="nav__one"><a href="profEdit.php">プロフィール編集</a></li>
     <li class="nav__one"><a href="passEdit.php">パスワード再設定</a></li>
+    <li class="nav__one"><a href="withdraw.php">退会</a></li>
     <li class="nav__one"><a href="logout.php">ログアウト</a></li>
   </ul>
 </div>
