@@ -409,7 +409,7 @@ li {
   background: #646464;
   color: #fff;
 }
-/*ページネーション*/.pagination-list {
+.pagination-list {
   position: relative;
   left: 50%;
   float: left;
@@ -440,6 +440,17 @@ li {
 .pagination .list-item a:hover {
   background: #333;
   color: #fff;
+}
+.icn-like {
+  float: right;
+  color: #ddd;
+}
+.icn-like:hover {
+  cursor: pointer;
+}
+.icn-like.active {
+  float: right;
+  color: #f00;
 }
 .header {
   width: 100%;

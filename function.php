@@ -466,6 +466,30 @@ function commentSend($comment, $spot_id)
     }
   }
 }
+//お気に入り情報取得(星の有無)
+function isLike($user_id, $spot_id)
+{
+  debug('お気に入り情報があるか確認します。');
+  debug('ユーザーID：' . $user_id);
+  debug('商品ID' . $spot_id);
+
+  try {
+    $dbh = dbConnect();
+    $sql = 'SELECT * FROM likes WHERE spot_id = :spot_id AND user_id = :user_id';
+    $data = array(':spot_id' => $spot_id, ':user_id' => $user_id);
+    $stmt = queryPost($dbh, $sql, $data);
+
+    if ($stmt->rowCount()) {
+      debug('お気に入りです。');
+      return true;
+    } else {
+      debug('気に入ってません。');
+      return false;
+    }
+  } catch (Exception $e) {
+    error_log('エラー発生:' . $e->getMessage());
+  }
+}
 
 // ——————————————————————————————
 // その他

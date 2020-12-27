@@ -419,7 +419,7 @@
   color: #fff;
 }
 
-/*ページネーション*/
+// ページネーション
 .pagination-list {
   position: relative;
   left: 50%;
@@ -456,4 +456,19 @@
 .pagination .list-item a:hover {
   background: #333;
   color: #FFFFFF;
+}
+
+// お気に入りアイコン
+.icn-like {
+  float: right;
+  color: #ddd;
+}
+
+.icn-like:hover {
+  cursor: pointer;
+}
+
+.icn-like.active {
+  float: right;
+  color: #FF0000;
 }

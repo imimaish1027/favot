@@ -89,6 +89,9 @@ require('head.php');
                 <div style="padding-bottom: 2px;"><?php echo sanitize($spot_info['address']); ?></div>
               </div>
               <p class="spot__tag spot__detail__one">#<?php echo sanitize($spot_info['tag']); ?></p>
+              <i class="fa fa-heart icn-like js-click-like <?php if (isLike($_SESSION['user_id'], $spot_info['id'])) {
+                                                              echo 'active';
+                                                            } ?>" aria-hidden="true" data-spotid="<?php echo sanitize($spot_info['id']); ?>"></i>
             </div>
           </div>
           <div class="user__day">

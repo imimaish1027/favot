@@ -31,31 +31,56 @@
     $countUp.on('keyup', function(e) {
       $countView.html($(this).val().length);
     });
-  });
 
-  var $dropArea = $('.area-drop');
-  var $fileInput = $('.input-file');
-  $dropArea.on('dragover', function(e) {
-    e.stopPropagation(); //余計なイベントをキャンセル
-    e.preventDefault();
-    $(this).css('border', '3px #ccc dashed');
-  });
-  $dropArea.on('dragleave', function(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    $(this).css('border', 'none');
-  });
-  $fileInput.on('change', function(e) {
-    $dropArea.css('border', 'none');
-    var file = this.files[0],
-      $img = $(this).siblings('.prev-img'),
-      fileReader = new FileReader();
+    var $dropArea = $('.area-drop');
+    var $fileInput = $('.input-file');
+    $dropArea.on('dragover', function(e) {
+      e.stopPropagation(); //余計なイベントをキャンセル
+      e.preventDefault();
+      $(this).css('border', '3px #ccc dashed');
+    });
+    $dropArea.on('dragleave', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      $(this).css('border', 'none');
+    });
+    $fileInput.on('change', function(e) {
+      $dropArea.css('border', 'none');
+      var file = this.files[0],
+        $img = $(this).siblings('.prev-img'),
+        fileReader = new FileReader();
 
-    fileReader.onload = function(event) {
-      $img.attr('src', event.target.result).show();
-    };
-    fileReader.readAsDataURL(file);
+      fileReader.onload = function(event) {
+        $img.attr('src', event.target.result).show();
+      };
+      fileReader.readAsDataURL(file);
 
+    })
+
+    // お気に入り登録・削除
+    var $like,
+      likeSpotId;
+    $like = $('.js-click-like') || null;
+    likeSpotId = $like.data('spotid') || null;
+
+    if (likeSpotId !== undefined && likeSpotId !== null) {
+      $like.on('click', function() {
+        var $this = $(this);
+        $.ajax({
+          type: "POST",
+          url: "ajaxLike.php",
+          data: {
+            spotId: likeSpotId
+          }
+        }).done(function(data) {
+          console.log('Ajax Success');
+
+          $this.toggleClass('active');
+        }).fail(function(msg) {
+          console.log('Ajax Error');
+        });
+      });
+    }
   });
 </script>
 </body>
