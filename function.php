@@ -233,7 +233,7 @@ function getSpotList($currentMinNum = 1, $sort, $span = 5)
         $sql = 'SELECT id FROM spots WHERE delete_flg = 0 ORDER BY create_date DESC';
         break;
       case 1:
-        $sql = 'SELECT id,COUNT(*) AS likes FROM spots INNER JOIN likes ON id = likes.spot_id WHERE spots.delete_flg = 0 GROUP BY spots.id ORDER BY likes DESC';
+        $sql = 'SELECT id,COUNT(*) AS likes FROM spots JOIN likes ON id = likes.spot_id WHERE spots.delete_flg = 0 GROUP BY spots.id ORDER BY likes DESC';
         break;
     }
 
@@ -346,6 +346,47 @@ function getUserInPhoto($user_id)
       return $rst['pic'];
     } else {
       debug('写真の取得に失敗しました。');
+      return false;
+    }
+  } catch (Exception $e) {
+    error_log('エラー発生:' . $e->getMessage());
+  }
+}
+// 投稿一覧取得
+function getPost($user_id)
+{
+  debug('投稿一覧を取得します。');
+  try {
+    $dbh = dbConnect();
+    $sql = 'SELECT * FROM spots WHERE user_id = :user_id AND delete_flg = 0 ORDER BY create_date DESC';
+    $data = array(':user_id' => $user_id);
+    $stmt = queryPost($dbh, $sql, $data);
+
+    if ($stmt) {
+      $rst['data'] = $stmt->fetchAll();
+      return $rst;
+    } else {
+      return false;
+    }
+  } catch (Exception $e) {
+    error_log('エラー発生:' . $e->getMessage());
+  }
+}
+//自分のお気に入り情報取得
+function getMyLike($user_id)
+{
+  debug('自分のお気に入り情報を取得します。');
+  debug('ユーザーID：' . $user_id);
+
+  try {
+    $dbh = dbConnect();
+    $sql = 'SELECT s.id, s.name AS spot_name, s.pic AS spot_pic, s.tag, s.address, u.id AS user_id, u.name AS user_name, u.pic AS user_pic, s.create_date FROM spots AS s LEFT JOIN likes AS l ON s.id = l.spot_id LEFT JOIN users AS u ON s.user_id = u.id WHERE l.user_id = :user_id ORDER BY l.create_date DESC';
+    $data = array(':user_id' => $user_id);
+    $stmt = queryPost($dbh, $sql, $data);
+
+    if ($stmt) {
+      return $stmt->fetchAll();
+    } else {
       return false;
     }
   } catch (Exception $e) {
@@ -501,7 +542,7 @@ function showImg($path)
   if (empty($path)) {
     return 'img/no-avatar.jpeg';
   } else {
-    return $path;
+    return 'uploads/' . $path;
   }
 }
 //メッセージ送信

@@ -133,6 +133,7 @@ require('head.php');
                 if (!empty($err_msg['address'])) echo $err_msg['address'];
                 ?>
               </div>
+
             </div>
 
             <div class="form__one">
