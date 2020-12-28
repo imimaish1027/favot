@@ -23,49 +23,6 @@
     background: $content-color;
     border-radius: 8px;
     color: $font-color;
-
-    .form {
-      width: 100%;
-
-      &__one {
-        width: 240px;
-        margin: 0 auto;
-        margin-bottom: $space_l;
-
-        label {
-          display: block;
-        }
-
-        input {
-          width: 240px;
-          height: 24px;
-        }
-
-        label.err input,
-        label.err select {
-          background: #f7dcd9;
-        }
-      }
-
-      &__title {
-        padding-bottom: $space_s;
-      }
-
-      &__keep {
-        display: block;
-        margin-bottom: $space_l;
-        text-align: center;
-      }
-
-      &__btn {
-        text-align: center;
-      }
-
-      .form__withdraw__intro {
-        text-align: center;
-        margin-bottom: $space_xl;
-      }
-    }
   }
   .to__mypage {
     margin: 0 auto;
@@ -77,6 +34,48 @@
     }
   }
 }
+   .form {
+     width: 100%;
+
+     &__one {
+       width: 240px;
+       margin: 0 auto;
+       margin-bottom: $space_l;
+
+       label {
+         display: block;
+       }
+
+       input {
+         width: 240px;
+         height: 24px;
+       }
+
+       label.err input,
+       label.err select {
+         background: #f7dcd9;
+       }
+     }
+
+     &__title {
+       padding-bottom: $space_s;
+     }
+
+     &__keep {
+       display: block;
+       margin-bottom: $space_l;
+       text-align: center;
+     }
+
+     &__btn {
+       text-align: center;
+     }
+
+     .form__withdraw__intro {
+       text-align: center;
+       margin-bottom: $space_xl;
+     }
+   }
 
 .wrapper {
   display: flex;
@@ -100,6 +99,7 @@
   &__user,
   &__form {
       padding: $space_l;
+      margin-bottom: $space_xl;
       background: $content-color;
       border-radius: 8px;
       color: $font-color;
@@ -144,48 +144,49 @@
           text-align: center;
         }
       }
-
-      .imgDrop-container {
-          width: 100%;
-          height: 160px;
-          margin-bottom: $space_l;
-          box-sizing: border-box;
-          position: relative;
-
-        .area-drop {
-          width: 160px;
-          height: 160px;
-          background: #F2F2F2;
-          color: #ccc;
-          text-align: center;
-          line-height: 150px;
-          position: absolute;
-          left: 0;
-          right: 0;
-          margin: auto;
-          box-sizing: border-box;
-        }
-
-        .input-file {
-          opacity: 0;
-          width: 100%;
-          height: 160px;
-          position: absolute;
-          left: 0;
-          right: 0;
-          margin: auto;
-          z-index: 99999;
-        }
-        .prev-img {
-          width: 100%;
-          position: absolute;
-          left: 0;
-          right: 0;
-          margin: auto;
-        }
-
-      }
     }
+}
+// 画像アップロード
+.imgDrop-container {
+  width: 100%;
+  height: 160px;
+  margin-bottom: $space_l;
+  box-sizing: border-box;
+  position: relative;
+
+  .area-drop {
+    width: 160px;
+    height: 160px;
+    background: #F2F2F2;
+    color: #ccc;
+    text-align: center;
+    line-height: 150px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    box-sizing: border-box;
+  }
+
+  .input-file {
+    opacity: 0;
+    width: 100%;
+    height: 160px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 99999;
+  }
+
+  .prev-img {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
 }
 
 .user {
@@ -360,6 +361,33 @@
       justify-content: flex-end;
   }
 }
+// プロフィール編集
+    .form {
+      width: 100%;
+
+      &__one {
+        width: 240px;
+        margin: 0 auto;
+        margin-bottom: $space_l;
+
+        label {
+          display: block;
+        }
+
+        input {
+          width: 240px;
+          height: 24px;
+        }
+
+        label.err input,
+        label.err select {
+          background: #f7dcd9;
+        }
+      }
+      &__title {
+        padding-bottom: $space_s;
+      }
+    }
 
 // コメント
 .comment {
